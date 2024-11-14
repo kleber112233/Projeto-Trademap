@@ -620,7 +620,7 @@ paises_selecionados, grupos_selecionados, produtos_selecionados, parceiros_selec
 urls_dict = gerar_urls(url_base, paises_selecionados, grupos_selecionados, produtos_selecionados, parceiros_selecionados, grupos_parceiros_selecionados)
 
 # Caminho para salvar o JSON com URLs e filtros
-caminho_arquivo = r"C:\Users\klebe\Desktop\selenium\data\urls_geradas.json"
+caminho_arquivo = r"data\urls_geradas.json"
 
 # Salva o dicionário em JSON
 with open(caminho_arquivo, 'w', encoding='utf-8') as arquivo:
