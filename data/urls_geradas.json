@@ -1,0 +1,128 @@
+{
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c%7c%7c%7c%7cTOTAL%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Todos os produtos",
+        "pais": "Todos",
+        "grupo de paises": "Nenhum",
+        "partner": "Todos",
+        "partner_group": "Nenhum"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c%7c%7c%7c13%7cTOTAL%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Todos os produtos",
+        "pais": "Todos",
+        "grupo de paises": "Nenhum",
+        "partner": "Todos",
+        "partner_group": "Acordo Comercial Ásia-Pacífico (APTA)"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c%7c%7c004%7c%7cTOTAL%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Todos os produtos",
+        "pais": "Todos",
+        "grupo de paises": "Nenhum",
+        "partner": "Afeganistão",
+        "partner_group": "Nenhum"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c%7c13%7c%7c%7cTOTAL%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Todos os produtos",
+        "pais": "Todos",
+        "grupo de paises": "Acordo Comercial Ásia-Pacífico (APTA)",
+        "partner": "Todos",
+        "partner_group": "Nenhum"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c%7c13%7c%7c13%7cTOTAL%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Todos os produtos",
+        "pais": "Todos",
+        "grupo de paises": "Acordo Comercial Ásia-Pacífico (APTA)",
+        "partner": "Todos",
+        "partner_group": "Acordo Comercial Ásia-Pacífico (APTA)"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c%7c13%7c004%7c%7cTOTAL%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Todos os produtos",
+        "pais": "Todos",
+        "grupo de paises": "Acordo Comercial Ásia-Pacífico (APTA)",
+        "partner": "Afeganistão",
+        "partner_group": "Nenhum"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c004%7c%7c%7c%7cTOTAL%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Todos os produtos",
+        "pais": "Afeganistão",
+        "grupo de paises": "Nenhum",
+        "partner": "Todos",
+        "partner_group": "Nenhum"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c004%7c%7c%7c13%7cTOTAL%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Todos os produtos",
+        "pais": "Afeganistão",
+        "grupo de paises": "Nenhum",
+        "partner": "Todos",
+        "partner_group": "Acordo Comercial Ásia-Pacífico (APTA)"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c004%7c%7c004%7c%7cTOTAL%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Todos os produtos",
+        "pais": "Afeganistão",
+        "grupo de paises": "Nenhum",
+        "partner": "Afeganistão",
+        "partner_group": "Nenhum"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c%7c%7c%7c%7c88%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Aeronaves e espaçonaves",
+        "pais": "Todos",
+        "grupo de paises": "Nenhum",
+        "partner": "Todos",
+        "partner_group": "Nenhum"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c%7c%7c%7c13%7c88%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Aeronaves e espaçonaves",
+        "pais": "Todos",
+        "grupo de paises": "Nenhum",
+        "partner": "Todos",
+        "partner_group": "Acordo Comercial Ásia-Pacífico (APTA)"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c%7c%7c004%7c%7c88%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Aeronaves e espaçonaves",
+        "pais": "Todos",
+        "grupo de paises": "Nenhum",
+        "partner": "Afeganistão",
+        "partner_group": "Nenhum"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c%7c13%7c%7c%7c88%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Aeronaves e espaçonaves",
+        "pais": "Todos",
+        "grupo de paises": "Acordo Comercial Ásia-Pacífico (APTA)",
+        "partner": "Todos",
+        "partner_group": "Nenhum"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c%7c13%7c%7c13%7c88%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Aeronaves e espaçonaves",
+        "pais": "Todos",
+        "grupo de paises": "Acordo Comercial Ásia-Pacífico (APTA)",
+        "partner": "Todos",
+        "partner_group": "Acordo Comercial Ásia-Pacífico (APTA)"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c%7c13%7c004%7c%7c88%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Aeronaves e espaçonaves",
+        "pais": "Todos",
+        "grupo de paises": "Acordo Comercial Ásia-Pacífico (APTA)",
+        "partner": "Afeganistão",
+        "partner_group": "Nenhum"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c004%7c%7c%7c%7c88%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Aeronaves e espaçonaves",
+        "pais": "Afeganistão",
+        "grupo de paises": "Nenhum",
+        "partner": "Todos",
+        "partner_group": "Nenhum"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c004%7c%7c%7c13%7c88%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Aeronaves e espaçonaves",
+        "pais": "Afeganistão",
+        "grupo de paises": "Nenhum",
+        "partner": "Todos",
+        "partner_group": "Acordo Comercial Ásia-Pacífico (APTA)"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c004%7c%7c004%7c%7c88%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Aeronaves e espaçonaves",
+        "pais": "Afeganistão",
+        "grupo de paises": "Nenhum",
+        "partner": "Afeganistão",
+        "partner_group": "Nenhum"
+    }
+}

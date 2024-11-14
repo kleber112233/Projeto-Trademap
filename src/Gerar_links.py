@@ -537,42 +537,85 @@ def paginar_opcoes(opcoes, titulo, escolhas_iniciais=None):
 # Função principal que organiza o fluxo entre os grupos e a edição final
 def gerar_urls(base_url, paises_selecionados, grupos_selecionados, produtos_selecionados, parceiros_selecionados, grupos_parceiros_selecionados):
     urls = {}
-    
-    # Loop através de todas as combinações possíveis de paises, grupos e produtos
-    for pais in paises_selecionados:
-        for grupo in grupos_selecionados:
-            for produto in produtos_selecionados:
-                
-                # Determina os valores para partner e partner_group
-                partner = parceiros_selecionados[0][0] if parceiros_selecionados else ""
-                partner_group = grupos_parceiros_selecionados[0][0] if grupos_parceiros_selecionados else ""
 
-                # Construa os parâmetros corretamente para a URL
-                pais_param = pais[0] if pais[0] != "-2" else ""  # Se for "Todos", o valor será vazio
-                grupo_param = grupo[0] if grupo[0] != "-2" else ""  # Se for "Nenhum", o valor será vazio
-                produto_param = produto[0] if produto[0] != "TOTAL" else ""  # Se for "Todos os produtos", o valor será vazio
-                partner_param = partner if partner else ""  # Se não for selecionado, o valor será vazio
-                partner_group_param = partner_group if partner_group else ""  # Se não for selecionado, o valor será vazio
+    for produto in produtos_selecionados:
+        produto_param = produto[0] if produto[0] != "TOTAL" else "TOTAL"
+        
+        # Gera combinações para quando país é "Todos"
+        if any(pais[0] == "-2" for pais in paises_selecionados):
+            for grupo in grupos_selecionados:
+                for partner in parceiros_selecionados:
+                    # Partner específico exclui a seleção de qualquer grupo de parceiros
+                    if partner[0] == "-2":  # Partner "Todos"
+                        for partner_group in grupos_parceiros_selecionados:
+                            url = base_url.format(
+                                pais="",
+                                grupo=grupo[0] if grupo[0] != "-2" else "",
+                                produto=produto_param,
+                                partner="",
+                                partner_group=partner_group[0] if partner_group[0] != "-2" else ""
+                            )
+                            urls[url] = {
+                                "produto": produto[1],
+                                "pais": "Todos",
+                                "grupo de paises": grupo[1],
+                                "partner": "Todos",
+                                "partner_group": partner_group[1]
+                            }
+                    else:  # Partner específico e nenhum grupo de parceiros
+                        url = base_url.format(
+                            pais="",
+                            grupo=grupo[0] if grupo[0] != "-2" else "",
+                            produto=produto_param,
+                            partner=partner[0],
+                            partner_group=""
+                        )
+                        urls[url] = {
+                            "produto": produto[1],
+                            "pais": "Todos",
+                            "grupo de paises": grupo[1],
+                            "partner": partner[1],
+                            "partner_group": "Nenhum"
+                        }
 
-                # Gera a URL com os parâmetros ajustados
-                url = base_url.format(
-                    pais=pais_param,
-                    grupo=grupo_param,
-                    produto=produto_param,
-                    partner=partner_param,
-                    partner_group=partner_group_param
-                )
-                
-                # Armazenar a URL e os filtros no dicionário
-                urls[url] = {
-                    "produto": produto[1] if produto[0] != "TOTAL" else "Todos os produtos",
-                    "pais": pais[1] if pais[0] != "-2" else "Todos",
-                    "grupo de paises": grupo[1] if grupo[0] != "-2" else "Nenhum",
-                    "partner": parceiros_selecionados[0][1] if parceiros_selecionados else "Todos",
-                    "partner_group": grupos_parceiros_selecionados[0][1] if grupos_parceiros_selecionados else "Nenhum"
-                }
-    
+        # Gera combinações para países específicos sem grupos de países
+        for pais in paises_selecionados:
+            if pais[0] != "-2":  # País específico
+                for partner in parceiros_selecionados:
+                    if partner[0] == "-2":  # Partner "Todos"
+                        for partner_group in grupos_parceiros_selecionados:
+                            url = base_url.format(
+                                pais=pais[0],
+                                grupo="",
+                                produto=produto_param,
+                                partner="",
+                                partner_group=partner_group[0] if partner_group[0] != "-2" else ""
+                            )
+                            urls[url] = {
+                                "produto": produto[1],
+                                "pais": pais[1],
+                                "grupo de paises": "Nenhum",
+                                "partner": "Todos",
+                                "partner_group": partner_group[1]
+                            }
+                    else:  # Partner específico e nenhum grupo de parceiros
+                        url = base_url.format(
+                            pais=pais[0],
+                            grupo="",
+                            produto=produto_param,
+                            partner=partner[0],
+                            partner_group=""
+                        )
+                        urls[url] = {
+                            "produto": produto[1],
+                            "pais": pais[1],
+                            "grupo de paises": "Nenhum",
+                            "partner": partner[1],
+                            "partner_group": "Nenhum"
+                        }
+
     return urls
+
 
 # URL base ajustada
 url_base = "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c{pais}%7c{grupo}%7c{partner}%7c{partner_group}%7c{produto}%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1"
