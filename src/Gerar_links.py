@@ -1,5 +1,5 @@
 import os
-
+import json
 
 
 paises = [
@@ -422,7 +422,6 @@ produtos = [
 
 
 
-
 # Função para calcular a largura máxima disponível no terminal
 def largura_terminal():
     return os.get_terminal_size().columns
@@ -430,12 +429,12 @@ def largura_terminal():
 # Função para exibir a mensagem de erro com um bloco visual destacado
 def exibir_mensagem_erro(mensagem, largura_total):
     print("\n" + "#" * largura_total)
-    print("#" + " " * (largura_total - 2) + "#")  # Linha vazia superior
+    print("#" + " " * (largura_total - 2) + "#")
     print("#" + mensagem.center(largura_total - 2) + "#")
-    print("#" + " " * (largura_total - 2) + "#")  # Linha vazia inferior
+    print("#" + " " * (largura_total - 2) + "#")
     print("#" * largura_total + "\n")
 
-# Função para paginar opções com layout de 3 colunas e 15 linhas, com espaçamento entre linhas
+# Função para paginar opções com layout de 3 colunas e 15 linhas
 def paginar_opcoes(opcoes, titulo, escolhas_iniciais=None):
     largura_total = largura_terminal()
     largura_coluna = largura_total // 3
@@ -452,7 +451,9 @@ def paginar_opcoes(opcoes, titulo, escolhas_iniciais=None):
     itens_selecionados = escolhas_iniciais if escolhas_iniciais else []
     mensagem_erro = ""
     
-    opcoes_ordenadas = sorted(opcoes, key=lambda x: x[1])
+    # Ordena as opções com "Todos" ou "Nenhum" no início, independentemente da ordem alfabética
+    opcoes_ordenadas = sorted(opcoes[1:], key=lambda x: x[1])
+    opcoes_ordenadas.insert(0, opcoes[0])
 
     while True:
         print("\n" * 100)
@@ -534,19 +535,66 @@ def paginar_opcoes(opcoes, titulo, escolhas_iniciais=None):
 
 
 # Função principal que organiza o fluxo entre os grupos e a edição final
+def gerar_urls(base_url, paises_selecionados, grupos_selecionados, produtos_selecionados, parceiros_selecionados, grupos_parceiros_selecionados):
+    urls = {}
+    
+    # Loop através de todas as combinações possíveis de paises, grupos e produtos
+    for pais in paises_selecionados:
+        for grupo in grupos_selecionados:
+            for produto in produtos_selecionados:
+                
+                # Determina os valores para partner e partner_group
+                partner = parceiros_selecionados[0][0] if parceiros_selecionados else ""
+                partner_group = grupos_parceiros_selecionados[0][0] if grupos_parceiros_selecionados else ""
+
+                # Construa os parâmetros corretamente para a URL
+                pais_param = pais[0] if pais[0] != "-2" else ""  # Se for "Todos", o valor será vazio
+                grupo_param = grupo[0] if grupo[0] != "-2" else ""  # Se for "Nenhum", o valor será vazio
+                produto_param = produto[0] if produto[0] != "TOTAL" else ""  # Se for "Todos os produtos", o valor será vazio
+                partner_param = partner if partner else ""  # Se não for selecionado, o valor será vazio
+                partner_group_param = partner_group if partner_group else ""  # Se não for selecionado, o valor será vazio
+
+                # Gera a URL com os parâmetros ajustados
+                url = base_url.format(
+                    pais=pais_param,
+                    grupo=grupo_param,
+                    produto=produto_param,
+                    partner=partner_param,
+                    partner_group=partner_group_param
+                )
+                
+                # Armazenar a URL e os filtros no dicionário
+                urls[url] = {
+                    "produto": produto[1] if produto[0] != "TOTAL" else "Todos os produtos",
+                    "pais": pais[1] if pais[0] != "-2" else "Todos",
+                    "grupo de paises": grupo[1] if grupo[0] != "-2" else "Nenhum",
+                    "partner": parceiros_selecionados[0][1] if parceiros_selecionados else "Todos",
+                    "partner_group": grupos_parceiros_selecionados[0][1] if grupos_parceiros_selecionados else "Nenhum"
+                }
+    
+    return urls
+
+# URL base ajustada
+url_base = "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c{pais}%7c{grupo}%7c{partner}%7c{partner_group}%7c{produto}%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1"
+
+# Função principal que organiza o fluxo entre os grupos e a edição final
 def fluxo_selecao():
     paises_selecionados = paginar_opcoes(paises, "Selecione os Países")
     grupos_selecionados = paginar_opcoes(grupos_paises, "Selecione os Grupos de Países")
     produtos_selecionados = paginar_opcoes(produtos, "Selecione os Produtos")
-    
+    parceiros_selecionados = paginar_opcoes(paises, "Selecione os Parceiros")  # Usando 'paises' para 'parceiros'
+    grupos_parceiros_selecionados = paginar_opcoes(grupos_paises, "Selecione os Grupos de Parceiros")
+
     # Revisão Final das escolhas antes de gerar URLs
     while True:
         print("\nRevisão das escolhas finais:")
         print("1. Países Selecionados:", [pais[1] for pais in paises_selecionados])
         print("2. Grupos de Países Selecionados:", [grupo[1] for grupo in grupos_selecionados])
         print("3. Produtos Selecionados:", [produto[1] for produto in produtos_selecionados])
-        
-        edicao = input("\nDeseja editar algum grupo? (1 - Países, 2 - Grupos de Países, 3 - Produtos, 0 - Continuar): ").strip()
+        print("4. Parceiros Selecionados:", [partner[1] for partner in parceiros_selecionados])
+        print("5. Grupos de Parceiros Selecionados:", [grupo_partner[1] for grupo_partner in grupos_parceiros_selecionados])
+
+        edicao = input("\nDeseja editar algum grupo? (1 - Países, 2 - Grupos de Países, 3 - Produtos, 4 - Parceiros, 5 - Grupos de Parceiros, 0 - Continuar): ").strip()
         
         if edicao == "1":
             paises_selecionados = paginar_opcoes(paises, "Selecione os Países", escolhas_iniciais=paises_selecionados)
@@ -554,39 +602,29 @@ def fluxo_selecao():
             grupos_selecionados = paginar_opcoes(grupos_paises, "Selecione os Grupos de Países", escolhas_iniciais=grupos_selecionados)
         elif edicao == "3":
             produtos_selecionados = paginar_opcoes(produtos, "Selecione os Produtos", escolhas_iniciais=produtos_selecionados)
+        elif edicao == "4":
+            parceiros_selecionados = paginar_opcoes(paises, "Selecione os Parceiros", escolhas_iniciais=parceiros_selecionados)
+        elif edicao == "5":
+            grupos_parceiros_selecionados = paginar_opcoes(grupos_paises, "Selecione os Grupos de Parceiros", escolhas_iniciais=grupos_parceiros_selecionados)
         elif edicao == "0":
             print("\nFinalizando as escolhas...")
             break
         else:
             print("Opção inválida. Tente novamente.")
 
-    return paises_selecionados, grupos_selecionados, produtos_selecionados
+    return paises_selecionados, grupos_selecionados, produtos_selecionados, parceiros_selecionados, grupos_parceiros_selecionados
 
 
-# Função para gerar URLs com base nas seleções
-def gerar_urls(base_url, paises_selecionados, grupos_selecionados, produtos_selecionados):
-    urls = []
-    for pais in paises_selecionados:
-        for produto in produtos_selecionados:
-            for grupo in grupos_selecionados:
-                url = base_url.format(
-                    pais=pais[0] if pais[0] != '-2' else "",
-                    grupo=grupo[0] if pais[0] == '-2' else "",
-                    produto=produto[0]
-                )
-                urls.append(url)
-    return urls
+# Execução do processo de seleção e geração de URLs
+paises_selecionados, grupos_selecionados, produtos_selecionados, parceiros_selecionados, grupos_parceiros_selecionados = fluxo_selecao()
+urls_dict = gerar_urls(url_base, paises_selecionados, grupos_selecionados, produtos_selecionados, parceiros_selecionados, grupos_parceiros_selecionados)
 
+# Caminho para salvar o JSON com URLs e filtros
+caminho_arquivo = r"C:\Users\klebe\Desktop\selenium\data\urls_geradas.json"
 
-url_base = "https://www.trademap.org/Country_SelProductCountry.aspx?nvpm=1%7c{pais}%7c%7c{grupo}%7c%7c{produto}%7c%7c%7c2%7c1%7c2%7c1%7c1%7c1%7c2%7c1%7c1%7c1"
-
-paises_selecionados, grupos_selecionados, produtos_selecionados = fluxo_selecao()
-urls = gerar_urls(url_base, paises_selecionados, grupos_selecionados, produtos_selecionados)
-
-# Salvar as URLs geradas
-with open(r"C:\Users\klebe\Desktop\selenium\data\urls_geradas.txt", "w") as arquivo:
-    for url in urls:
-        arquivo.write(url + "\n")
+# Salva o dicionário em JSON
+with open(caminho_arquivo, 'w', encoding='utf-8') as arquivo:
+    json.dump(urls_dict, arquivo, ensure_ascii=False, indent=4)
 
 # Exibir as escolhas finais
 print("\nSUAS ESCOLHAS:")
@@ -600,4 +638,10 @@ for grupo in grupos_selecionados:
 print("\nProdutos Selecionados:")
 for produto in produtos_selecionados:
     print(f"- {produto[1]}")
-print("\nURLs foram geradas e salvas em 'urls_geradas.txt'.")
+print("\nParceiros Selecionados:")
+for partner in parceiros_selecionados:
+    print(f"- {partner[1]}")
+print("\nGrupos de Parceiros Selecionados:")
+for grupo_partner in grupos_parceiros_selecionados:
+    print(f"- {grupo_partner[1]}")
+print(f"\nURLs e filtros foram gerados e salvos em '{caminho_arquivo}'.")

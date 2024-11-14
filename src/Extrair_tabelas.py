@@ -8,9 +8,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 import csv
+from time import sleep
 
 # Função para abrir navegador e extrair a tabela de uma URL específica
-def abrir_navegador(url, nome_pais):
+def abrir_navegador(url, nome_pais, nome_grupo, nome_produto):
     inicio = time.time()
     print(f"Carregando URL: {url}")
 
@@ -34,13 +35,15 @@ def abrir_navegador(url, nome_pais):
         # Acessar a URL
         navegador.get(url)
         print(f"Página carregada em {time.time()-inicio} segundos")
-
+        table = WebDriverWait(navegador, 10).until(EC.visibility_of_element_located((By.ID, 'ctl00_PageContent_MyGridView1')))
+        sleep(0.5)
         # Selecionar 300 por página para carregar todos os dados
         num_pagina = WebDriverWait(navegador, 10).until(
             EC.element_to_be_clickable((By.ID, "ctl00_PageContent_GridViewPanelControl_DropDownList_PageSize"))
         )
         maximo = Select(num_pagina)
         maximo.select_by_value("300")
+        sleep(4)
 
         # Esperar a tabela ser visível
         table = WebDriverWait(navegador, 10).until(EC.visibility_of_element_located((By.ID, 'ctl00_PageContent_MyGridView1')))
@@ -62,8 +65,8 @@ def abrir_navegador(url, nome_pais):
         if not os.path.exists(r'data/tabelas_Extraidas'):
             os.makedirs(r'data/tabelas_Extraidas')
 
-        # Salvar em CSV
-        nome_arquivo = os.path.join(r'data/tabelas_Extraidas', f'{nome_pais}.csv')
+        # Definir o nome do arquivo com base nos filtros aplicados
+        nome_arquivo = os.path.join(r'data/tabelas_Extraidas', f'{nome_pais}_{nome_grupo}_{nome_produto}.csv')
         with open(nome_arquivo, 'w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             writer.writerow(headers)
@@ -77,16 +80,18 @@ def abrir_navegador(url, nome_pais):
     finally:
         navegador.quit()
 
-# Função principal que itera sobre o arquivo de URLs e executa o processo para cada URL
+# Função principal que itera sobre o arquivo JSON e executa o processo para cada URL
+import json
 def extrair_tabelas():
-    with open(r'data/urls_geradas.txt', 'r') as file:
-        urls = file.readlines()
+    with open(r'data/urls_geradas.json', 'r', encoding='utf-8') as file:
+        urls_data = json.load(file)
     
-    for url in urls:
-        url = url.strip()
-        nome_pais = url.split('%7c')[1]
+    for url, filtros in urls_data.items():
+        nome_pais = filtros["pais"]
+        nome_grupo = filtros["grupo"]
+        nome_produto = filtros["produto"]
         try:
-            abrir_navegador(url, nome_pais)
+            abrir_navegador(url, nome_pais, nome_grupo, nome_produto)
         except Exception as e:
             print(f"Erro ao processar a URL {url}: {e}")
             continue
