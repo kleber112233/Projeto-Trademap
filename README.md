@@ -40,7 +40,7 @@ O objetivo principal deste projeto é facilitar a coleta de dados filtrados de f
 1. **Instale as Dependências**:
    - Certifique-se de ter Python e as bibliotecas necessárias instaladas. Para instalar as dependências, execute:
      ```bash
-     pip install selenium beautifulsoup4 pandas
+     pip install selenium beautifulsoup4 pandas webdriver-manager
      ```
    
 2. **Configure o Selenium**:
