@@ -1,0 +1,44 @@
+{
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c076%7c%7c%7c%7c10%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Cereais",
+        "pais": "Brasil",
+        "grupo de paises": "Nenhum",
+        "partner": "Todos",
+        "partner_group": "Nenhum"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c484%7c%7c%7c%7c10%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Cereais",
+        "pais": "México",
+        "grupo de paises": "Nenhum",
+        "partner": "Todos",
+        "partner_group": "Nenhum"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c842%7c%7c%7c%7c10%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Cereais",
+        "pais": "Estados Unidos",
+        "grupo de paises": "Nenhum",
+        "partner": "Todos",
+        "partner_group": "Nenhum"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c076%7c%7c%7c%7c12%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Sementes e frutas oleaginosas",
+        "pais": "Brasil",
+        "grupo de paises": "Nenhum",
+        "partner": "Todos",
+        "partner_group": "Nenhum"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c484%7c%7c%7c%7c12%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Sementes e frutas oleaginosas",
+        "pais": "México",
+        "grupo de paises": "Nenhum",
+        "partner": "Todos",
+        "partner_group": "Nenhum"
+    },
+    "https://www.trademap.org/Country_SelProduct.aspx?nvpm=1%7c842%7c%7c%7c%7c12%7c%7c%7c2%7c1%7c1%7c1%7c1%7c1%7c2%7c1%7c1%7c1": {
+        "produto": "Sementes e frutas oleaginosas",
+        "pais": "Estados Unidos",
+        "grupo de paises": "Nenhum",
+        "partner": "Todos",
+        "partner_group": "Nenhum"
+    }
+}
